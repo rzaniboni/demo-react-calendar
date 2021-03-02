@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+}
+
+.calendarWrapper {
+  min-width: 280px;
+  max-width: 400px;
+  background-color: white;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 4px;
+  column-gap: 2px;
+  list-style: none;
+  text-align: center;
+  padding: 10px;
+}
+
+.weekDay {
+  background: #eee;
+  display: grid;
+  font-size: 0.8rem;
+  padding: 4px 6px;
+  border-radius: 2px;
+}
+
+.day {
+  padding: 4px 4px;
+  border: 2px solid white;
+  border-radius: 4px;
+  color: #ccc;
+  transition: 300ms all ease-in-out;
+}
+
+.currentMonthDay {
+  color: #4a5568;
+}
+
+.day:hover {
+  border: 2px solid #3b82f6;
+  border-radius: 2px;
+}
+
+.today {
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 4px;
+}
