@@ -1,6 +1,7 @@
 import React from 'react'
 import css from './App.module.css'
-import { CalendarMonth, CalendarMonthDays } from './calendar'
+import { CalendarMonth, CalendarMonthDays, CalendarMonthTitle, CalendarMonthToday, CalendarMonthWeekdays } from './calendar'
+import { CalendarMonthMonthsList } from './calendar/CalendarMonthMonthsList'
 
 function App() {
   const newDate = new Date(Date.now())
@@ -17,7 +18,17 @@ function App() {
       </div>
       <div className={css.content}>
         <h1>Calendario</h1>
-        <CalendarMonth>
+        <CalendarMonth locale={'it'}>
+          <CalendarMonthTitle>
+            <CalendarMonthToday />
+          </CalendarMonthTitle>
+          <CalendarMonthMonthsList />
+          <CalendarMonthWeekdays />
+          <CalendarMonthDays />
+        </CalendarMonth>
+        <CalendarMonth locale={'en'}>
+          <CalendarMonthTitle />
+          <CalendarMonthWeekdays />
           <CalendarMonthDays />
         </CalendarMonth>
       </div>

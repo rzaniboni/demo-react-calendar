@@ -30,7 +30,17 @@
   column-gap: 2px;
   list-style: none;
   text-align: center;
-  padding: 10px;
+  padding: 4px;
+}
+
+.calendarMonths {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  row-gap: 4px;
+  column-gap: 2px;
+  list-style: none;
+  text-align: center;
+  padding: 4px;
 }
 
 .weekDay {
@@ -41,6 +51,15 @@
   border-radius: 2px;
 }
 
+.monthShort {
+  background: #eee;
+  display: grid;
+  font-size: 0.7rem;
+  padding: 4px 1px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
 .day {
   padding: 4px 4px;
   border: 2px solid white;
@@ -48,7 +67,6 @@
   color: #ccc;
   transition: 300ms all ease-in-out;
 }
-
 .currentMonthDay {
   color: #4a5568;
 }

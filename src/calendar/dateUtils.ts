@@ -128,3 +128,11 @@ export function generateDays(currentDate: Date): CalendarDay[] {
 function getWeekday(date: string) {
   return dayjs(date).weekday();
 }
+
+export function changeMonth(day: Date, month: number) {
+  const result = dayjs(day).month(month);
+  console.log(result.toDate());
+  return result;
+}
+
+// console.log(changeMonth("2021-03-02", 2));

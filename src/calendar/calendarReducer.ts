@@ -1,7 +1,6 @@
 import dayjs, { Dayjs, MonthNames, WeekdayNames } from "dayjs";
 import { CalendarDay } from "./types";
-import { getMonthName, getWeekDays, generateDays, getWeekDaysShort, getMonthShort } from "./dateUtils";
-
+import { getMonthName, getWeekDays, generateDays, getWeekDaysShort, getMonthShort, changeMonth } from "./dateUtils";
 
 export interface CalendarState {
   day: Date;
@@ -19,11 +18,12 @@ export interface CalendarState {
 export type CalendarAction =
   | { type: "CHANGE_LOCALE"; payload: string }
   | { type: "CHANGE_DAY"; payload: Date }
+  | { type: "CHANGE_MONTH"; payload: number }
   | { type: "PREV_MONTH" }
   | { type: "NEXT_MONTH" };
 
-const initialLocale = "it";
-const initialDate = new Date("2021-04-02");
+//const initialLocale = "it";
+//const initialDate = new Date("2021-04-02");
 
 export const getInitialState = (locale: string, day: Date): CalendarState => ({
   locale,
@@ -38,7 +38,19 @@ export const getInitialState = (locale: string, day: Date): CalendarState => ({
   monthNamesShort: getMonthShort(locale),
 });
 
+function generateDataFromMonth(day: Dayjs, locale: string) {
+  return {
+    currentDay: day,
+    day: day.toDate(),
+    days: generateDays(day.toDate()),
+    currentMonthName: getMonthName(day.month(), locale),
+    currentWeekDay: getWeekDays(locale)[day.weekday()].toString(),
+    currentDayOrder: day.format("D"),
+  };
+}
+
 function calendarReducer(state: CalendarState, action: CalendarAction): CalendarState {
+  console.log(action);
   switch (action.type) {
     case "CHANGE_LOCALE":
       return {
@@ -50,41 +62,35 @@ function calendarReducer(state: CalendarState, action: CalendarAction): Calendar
         weekDays: getWeekDays(action.payload),
         monthNamesShort: getMonthShort(action.payload),
       };
-      break;
     case "CHANGE_DAY":
+      const changeDay = dayjs(action.payload);
+      const changeDayData = generateDataFromMonth(changeDay, state.locale);
       return {
         ...state,
-        day: action.payload,
-        days: generateDays(action.payload),
-        currentMonthName: getMonthName(state.day.getMonth(), state.locale),
-        currentWeekDay: getWeekDays(state.locale)[dayjs(action.payload).weekday()].toString(),
-        currentDayOrder: dayjs(action.payload).format("D"),
+        ...changeDayData,
       };
-      break;
     case "PREV_MONTH":
       const prevDay = state.currentDay.add(-1, "M");
+      const prevMonthData = generateDataFromMonth(prevDay, state.locale);
       return {
         ...state,
-        currentDay: prevDay,
-        day: prevDay.toDate(),
-        days: generateDays(prevDay.toDate()),
-        currentMonthName: getMonthName(prevDay.month(), state.locale),
-        currentWeekDay: getWeekDays(state.locale)[prevDay.weekday()].toString(),
-        currentDayOrder: prevDay.format("D"),
+        ...prevMonthData,
       };
-      break;
     case "NEXT_MONTH":
       const nextDay = state.currentDay.add(1, "M");
+      const nextMonthData = generateDataFromMonth(nextDay, state.locale);
       return {
         ...state,
-        currentDay: nextDay,
-        day: nextDay.toDate(),
-        days: generateDays(nextDay.toDate()),
-        currentMonthName: getMonthName(nextDay.month(), state.locale),
-        currentWeekDay: getWeekDays(state.locale)[nextDay.weekday()].toString(),
-        currentDayOrder: nextDay.format("D"),
+        ...nextMonthData,
       };
-      break;
+    case "CHANGE_MONTH":
+      console.log(action);
+      const changeMonthDay = changeMonth(state.currentDay.toDate(), action.payload);
+      const changeMonthData = generateDataFromMonth(changeMonthDay, state.locale);
+      return {
+        ...state,
+        ...changeMonthData,
+      };
   }
 }
 
