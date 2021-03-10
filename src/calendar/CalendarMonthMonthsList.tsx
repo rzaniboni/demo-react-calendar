@@ -7,11 +7,8 @@ export const CalendarMonthMonthsList = () => {
     <ul className={css.calendarMonths}>
       {state.monthNamesShort.map((month, index) => <li role="button" className={css.monthShort} key={month.toString()}
         onClick={() => dispatch({ type: 'CHANGE_MONTH', payload: index })}
-
       >
         {month}
-
-
       </li>)}
     </ul>
   )

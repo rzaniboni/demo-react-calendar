@@ -50,7 +50,6 @@ function generateDataFromMonth(day: Dayjs, locale: string) {
 }
 
 function calendarReducer(state: CalendarState, action: CalendarAction): CalendarState {
-  console.log(action);
   switch (action.type) {
     case "CHANGE_LOCALE":
       return {
@@ -84,7 +83,6 @@ function calendarReducer(state: CalendarState, action: CalendarAction): Calendar
         ...nextMonthData,
       };
     case "CHANGE_MONTH":
-      console.log(action);
       const changeMonthDay = changeMonth(state.currentDay.toDate(), action.payload);
       const changeMonthData = generateDataFromMonth(changeMonthDay, state.locale);
       return {

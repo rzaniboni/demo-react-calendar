@@ -16,6 +16,7 @@ function App() {
       <div className={css.header}>
         <h2>Calendar compound component</h2>
       </div>
+
       <div className={css.content}>
         <h1>Calendario</h1>
         <CalendarMonth locale={'it'}>
