@@ -11,7 +11,7 @@
   grid-gap: 20px;
   grid-template-areas:
     "header header"
-    "nav content"
+    "content content"
     "footer footer";
 }
 
@@ -28,11 +28,13 @@
 
 .header {
   grid-area: header;
-  display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 1fr; /* prende tutta la larghezza */
+  grid-template-columns: auto; /* prende tutta la larghezza */
   gap: 10px;
   padding: 10px;
+  color: white;
+  display: grid;
+  justify-content: center;
   align-items: center;
   background-color: var(--background-color);
 }
@@ -51,13 +53,15 @@
 .content {
   grid-area: content;
   display: grid;
-  align-content: start;
+  justify-content: center;
 }
 
 .footer {
   grid-area: footer;
   display: grid;
+  padding-top: 1rem;
   justify-content: center;
+  color: white;
   background-color: var(--background-color);
 }
 

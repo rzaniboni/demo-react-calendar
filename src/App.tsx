@@ -2,6 +2,7 @@ import React from 'react'
 import css from './App.module.css'
 import { CalendarMonth, CalendarMonthDays, CalendarMonthTitle, CalendarMonthToday, CalendarMonthWeekdays } from './calendar'
 import { CalendarMonthMonthsList } from './calendar/CalendarMonthMonthsList'
+import { FaGithub } from 'react-icons/fa';
 
 function App() {
   const newDate = new Date(Date.now())
@@ -15,6 +16,7 @@ function App() {
     <div className={css.container} >
       <div className={css.header}>
         <h2>Calendar compound component</h2>
+        <a href="https://github.com/rzaniboni/demo-react-calendar"> <FaGithub /></a>
       </div>
 
       <div className={css.content}>
@@ -27,6 +29,7 @@ function App() {
           <CalendarMonthWeekdays />
           <CalendarMonthDays />
         </CalendarMonth>
+        <br />
         <CalendarMonth locale={'en'}>
           <CalendarMonthTitle />
           <CalendarMonthWeekdays />
@@ -34,7 +37,7 @@ function App() {
         </CalendarMonth>
       </div>
       <div className={css.footer}>
-        <h5>Footer</h5>
+        <h5>Roberto Zaniboni 2021</h5>
       </div>
     </div>
   );
